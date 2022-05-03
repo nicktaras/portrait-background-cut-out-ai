@@ -1,6 +1,5 @@
-IMAGE_SRC = './img/8.jpg'
 
-const loadImage = () => {
+const loadImage = (IMAGE_SRC) => {
   const img = new Image()
   img.src = IMAGE_SRC
 

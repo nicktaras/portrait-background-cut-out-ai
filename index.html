@@ -12,16 +12,13 @@
     <p>Click on the "Choose File" button to upload a file:</p>
 
     <input type="file" id="imageInput" name="imageInput" accept="image/*">
-    <input type="submit">
     
     <script>
         
       let imgInput = document.getElementById('imageInput');
-      imgInput.addEventListener('change', function(e) {
-        if(e.target.files) {
-          let imageFile = e.target.files[0]; //here we get the image file
-          var reader = new FileReader();
-          loadImage(reader.readAsDataURL(imageFile));
+      imgInput.addEventListener('change', function(event) {
+        if(event.target.files) {
+          loadImage(URL.createObjectURL(event.target.files[0]));
         }
       });
         

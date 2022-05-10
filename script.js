@@ -1,5 +1,5 @@
 
-const loadImage = (IMAGE_SRC) => {
+const loadImage = (IMAGE_SRC, architecture, outputStride, quantBytes, segmentationThreshold, scoreTreshold) => {
   const img = new Image()
   img.src = IMAGE_SRC
 
@@ -10,22 +10,22 @@ const loadImage = (IMAGE_SRC) => {
     canvas.width = img.width
     canvas.height = img.height
     ctx.drawImage(img, 0, 0)
-    backgroundRemoval()
+    backgroundRemoval(architecture, outputStride, quantBytes, segmentationThreshold, scoreTreshold)
   })
 }
 
-const backgroundRemoval = async () => {
+const backgroundRemoval = async (architecture, outputStride, quantBytes, segmentationThreshold, scoreTreshold) => {
   const canvas = document.querySelector('canvas')
 
   const net = await bodyPix.load({
-    architecture: 'ResNet50',
-    outputStride: 32,
-    quantBytes: 4
+    architecture: architecture, // 'ResNet50',
+    outputStride: outputStride, //32,
+    quantBytes: quantBytes, // 4
   })
   const segmentation = await net.segmentPerson(canvas, {
     internalResolution: 'medium',
-    segmentationThreshold: 0.7,
-    scoreTreshold: 0.7
+    segmentationThreshold: segmentationThreshold, // 0.7,
+    scoreTreshold: scoreTreshold, // 0.7
   })
 
   const ctx = canvas.getContext('2d')

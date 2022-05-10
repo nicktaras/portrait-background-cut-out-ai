@@ -12,13 +12,26 @@
     <p>Click on the "Choose File" button to upload a file:</p>
 
     <input type="file" id="imageInput" name="imageInput" accept="image/*">
+        
+    <input value type="string" id="architecture" value="ResNet50">
+    <input type="number" id="outputStride" value="32">
+    <input type="number" id="quantBytes" value="4">
+    <input type="number" id="segmentationThreshold" value="0.7">
+    <input type="number" id="scoreTreshold" value="0.7">
     
     <script>
         
       let imgInput = document.getElementById('imageInput');
       imgInput.addEventListener('change', function(event) {
         if(event.target.files) {
-          loadImage(URL.createObjectURL(event.target.files[0]));
+          loadImage(
+              URL.createObjectURL(event.target.files[0]),
+              document.getElementById("architecture").value,
+              document.getElementById("outputStride").value,
+              document.getElementById("quantBytes").value
+              document.getElementById("segmentationThreshold").value
+              document.getElementById("scoreTreshold").value
+          );
         }
       });
         
